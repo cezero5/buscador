@@ -63,7 +63,8 @@ def search_results(query):
             print(f"{result["title"]}\n {result["href"]}\n {result["body"]}\n\n")
 
 def img_search_s_n(imagen):    
-    
+    bandera = False
+
     if imagen == "s":
         bandera = True
     
@@ -99,12 +100,3 @@ def query_search(num_palabra):
 menu_redes()
 query_search(num_palabra)
 linea_busqueda()
-
-
-
-
-    
-
-
-
-
