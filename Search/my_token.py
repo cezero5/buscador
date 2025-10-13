@@ -3,6 +3,9 @@ import os
 
 class My_Token:
     
+    def __init__(self):
+        pass
+    
     @classmethod
     def paths_file(self, pather: str, folder: str, file: str) -> str:
         BASE = os.path.dirname(os.path.abspath(__file__))
@@ -26,6 +29,11 @@ class My_Token:
     def google_search_engine(self) -> str:
         token = self.leer_Token('google_searchengine.txt')
         return token
-#if __name__ == "__main__":
-#    My_Token = My_Token.google_search_engine()
+        
+    @classmethod
+    def telegram_token(self) -> str:
+        token = self.leer_Token('telegram_token.txt')
+        return token
+# if __name__ == "__main__":
+#    My_Token = My_Token.telegram_token()
 #    print(My_Token)

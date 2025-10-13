@@ -1,0 +1,1 @@
+# Este archivo puede estar vacío. Sirve para que Python reconozca la carpeta Search como un paquete.
