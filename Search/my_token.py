@@ -1,7 +1,7 @@
 import os
 
 
-class My_Token:
+class my_token:
     
     def __init__(self):
         pass
@@ -14,26 +14,26 @@ class My_Token:
         return RUTA
     
     @classmethod
-    def leer_Token(self, file: str) -> str:
+    def leer_token(self, file: str) -> str:
         ruta = self.paths_file('..', 'key', file)
         with open(ruta, 'r', encoding='utf-8') as archivo:
             token = archivo.read()
             return token
         
     @classmethod
-    def google_Token(self) -> str:
-        token = self.leer_Token('google_api.txt')
+    def google_token(self) -> str:
+        token = self.leer_token('google_api.txt')
         return token
     
     @classmethod
     def google_search_engine(self) -> str:
-        token = self.leer_Token('google_searchengine.txt')
+        token = self.leer_token('google_searchengine.txt')
         return token
         
     @classmethod
     def telegram_token(self) -> str:
-        token = self.leer_Token('telegram_token.txt')
+        token = self.leer_token('telegram_token.txt')
         return token
 # if __name__ == "__main__":
-#    My_Token = My_Token.telegram_token()
-#    print(My_Token)
+#    my_token = my_token.telegram_token()
+#    print(my_token)

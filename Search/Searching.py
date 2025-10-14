@@ -1,10 +1,10 @@
-from Search.my_token import My_Token
+from Search.my_token import my_token
 import os
 import requests
 import time;
 #import pandas 
 
-class Search:
+class search:
     
     def __init__(self, query, _token, search_engine):
         self.query = query
@@ -92,6 +92,6 @@ class Search:
         return text or f"No encontré resultados para: {self.query}"
         
 # if __name__ == "__main__":
-#     searcher = Search('Cesar Eduardo Mejia', My_Token.google_Token(), My_Token.google_search_engine())
+#     searcher = search('Cesar Eduardo Mejia', my_token.google_Token(), my_token.google_search_engine())
 #     # result = searcher.format_info(1)
 #     print(f'------------------------------\n {searcher.format_request()} \n--------------------------------')

@@ -1,18 +1,18 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
-from Search.my_token import My_Token
-from Search.searching import Search
-from Search.query_search import Query
+from Search.my_token import my_token
+from Search.searching import search
+from Search.query_search import query
 class telegram_bot:
     
     def __init__(self):
-        self.My_Token_BOT = My_Token.telegram_token()
+        self.My_Token_BOT = my_token.telegram_token()
 
     async def start(self, update: Update, context: CallbackContext):
         await update.message.reply_text("Hola como te puedo ayudar")
         
     async def search(self, update: Update, context: CallbackContext):
-        await update.message.reply_text(Search(Query(context.args).query_format(), My_Token.google_Token(), My_Token.google_search_engine()).format_request())
+        await update.message.reply_text(search(query(context.args).query_format(), my_token.google_token(), my_token.google_search_engine()).format_request())
     
     async def help(self, update: Update, context: CallbackContext):
         await update.message.reply_text(f' /start\n/search\n')
