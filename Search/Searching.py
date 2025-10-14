@@ -91,7 +91,6 @@ class Search:
         text = "\n".join(lines).strip()
         return text or f"No encontré resultados para: {self.query}"
         
-
 # if __name__ == "__main__":
 #     searcher = Search('Cesar Eduardo Mejia', My_Token.google_Token(), My_Token.google_search_engine())
 #     # result = searcher.format_info(1)
