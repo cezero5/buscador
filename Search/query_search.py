@@ -1,4 +1,4 @@
-class Query:
+class query:
     def __init__(self, chat_text):
         self.chat_text = chat_text
         
@@ -40,5 +40,5 @@ class Query:
             _text += i + ' '
         return _text
 # if __name__ == '__main__':
-#     bot = Query(['fdsfasdf','-d=linkedl.com,facebook.com','asfsdff','-or=felipe,mejia','-ait=','asdfsdaf'])
+#     bot = query(['fdsfasdf','-d=linkedl.com,facebook.com','asfsdff','-or=felipe,mejia','-ait=','asdfsdaf'])
 #     print(bot.query_format())
