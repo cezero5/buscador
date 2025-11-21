@@ -1,4 +1,4 @@
 peliculas.py
 FlipperAmiibo/__pycache__/
 *.pyc
-key/
+key/*
