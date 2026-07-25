@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control del Bot</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    gap: 24px;
+  }
+  h1 { font-size: 1.4rem; margin: 0; }
+  #estado {
+    font-size: 1rem;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #1e293b;
+  }
+  .activo { color: #4ade80; }
+  .inactivo { color: #f87171; }
+  .botones { display: flex; gap: 16px; }
+  button {
+    padding: 12px 28px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  #btnStart { background: #22c55e; color: #052e16; }
+  #btnStop { background: #ef4444; color: #450a0a; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+</head>
+<body>
+
+<h1>Control del Bot de Telegram</h1>
+<div id="estado">Cargando...</div>
+<div class="botones">
+  <button id="btnStart">Activar</button>
+  <button id="btnStop">Detener</button>
+</div>
+
+<script>
+  // Ajusta esto a la URL real de tu controlador desplegado en Railway.
+  const CONTROLLER_URL = "https://TU-CONTROLADOR.up.railway.app";
+  const CONTROL_KEY = "cambia-esta-clave"; // debe coincidir con CONTROL_KEY del backend
+
+  const estadoEl = document.getElementById("estado");
+  const btnStart = document.getElementById("btnStart");
+  const btnStop = document.getElementById("btnStop");
+
+  function pintarEstado(activo) {
+    estadoEl.textContent = activo ? "● Activo" : "● Detenido";
+    estadoEl.className = activo ? "activo" : "inactivo";
+    btnStart.disabled = activo;
+    btnStop.disabled = !activo;
+  }
+
+  async function consultarEstado() {
+    try {
+      const res = await fetch(`${CONTROLLER_URL}/status`);
+      const data = await res.json();
+      pintarEstado(data.activo);
+    } catch (e) {
+      estadoEl.textContent = "No se pudo conectar al controlador";
+    }
+  }
+
+  async function llamar(endpoint) {
+    btnStart.disabled = true;
+    btnStop.disabled = true;
+    try {
+      const res = await fetch(`${CONTROLLER_URL}${endpoint}`, {
+        method: "POST",
+        headers: { "X-Control-Key": CONTROL_KEY }
+      });
+      const data = await res.json();
+      pintarEstado(data.activo);
+    } catch (e) {
+      estadoEl.textContent = "Error al conectar con el controlador";
+    }
+  }
+
+  btnStart.addEventListener("click", () => llamar("/start"));
+  btnStop.addEventListener("click", () => llamar("/stop"));
+
+  consultarEstado();
+</script>
+
+</body>
+</html>
