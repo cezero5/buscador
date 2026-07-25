@@ -2,9 +2,10 @@ import os
 import subprocess
 import signal
 from flask import Flask, request, jsonify
- 
+from flask_cors import CORS
+
 app = Flask(__name__)
- 
+CORS(app) 
 # Clave secreta para proteger los endpoints. Configúrala como variable
 # de entorno CONTROL_KEY en Railway (o donde despliegues este controlador).
 CONTROL_KEY = os.getenv("CONTROL_KEY", "cambia-esta-clave")
