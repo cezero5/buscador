@@ -3,9 +3,10 @@ import subprocess
 import signal
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
+ 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)  # permite peticiones desde otros dominios (ej. tu web en Vercel)
+ 
 # Clave secreta para proteger los endpoints. Configúrala como variable
 # de entorno CONTROL_KEY en Railway (o donde despliegues este controlador).
 CONTROL_KEY = os.getenv("CONTROL_KEY", "cambia-esta-clave")
@@ -41,11 +42,9 @@ def start_bot():
         return jsonify({"mensaje": "El bot ya está activo", "activo": True})
  
     try:
-        bot_process = subprocess.Popen(
-            ["python", BOT_PATH],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-        )
+        # No capturamos stdout/stderr: así el output del bot (incluyendo
+        # errores) aparece directamente en los logs de Railway.
+        bot_process = subprocess.Popen(["python", BOT_PATH])
         return jsonify({"mensaje": "Bot iniciado", "activo": True})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -78,4 +77,3 @@ def stop_bot():
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
- 
