@@ -7,7 +7,7 @@ class my_token:
         pass
     
     @classmethod
-    def paths_file(self, pather: str, folder: str, file: str) -> str:
+    def paths_file(cls, pather: str, folder: str, file: str) -> str:
         BASE = os.path.dirname(os.path.abspath(__file__))
         RUTA = os.path.join(BASE, pather, folder, file)
         RUTA = os.path.normpath(RUTA)

@@ -8,7 +8,7 @@ class query:
             '-d=': lambda v: opcion.append(f'site:{v}'),
             '-ft=': lambda v: opcion.append(f'filetype:{v}'),   # lógica para -ft=
             '-it=': lambda v: opcion.append(f'intitle:{v}'),   # lógica para -it=
-            '-ait=': lambda v: opcion.append(f'allintile{v}'),  # lógica para -ait=
+            '-ait=': lambda v: opcion.append(f'allintitle:{v}'),  # lógica para -ait=
             '-we=': lambda v: opcion.append(f'"{v}"'),   # lógica para -we=
             '-e=': lambda v: opcion.append(f'-{v}'),    # lógica para -e=
             '-or=': lambda v: opcion.append(f'or {v}'),   # lógica para -or=

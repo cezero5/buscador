@@ -60,7 +60,7 @@ def search_results(query):
         
         print("Busqueda de paginas web")
         for result in search_results:
-            print(f"{result["title"]}\n {result["href"]}\n {result["body"]}\n\n")
+            print(f"{result['title']}\n {result['href']}\n {result['body']}\n\n")
 
 def img_search_s_n(imagen):    
     bandera = False
@@ -78,7 +78,7 @@ def img_search(query):
     print("\nBusqueda de imagenes")
     search_image = DDGS().images(query, max_results=2, region="us-en", safesearch="off")
     for img in search_image:
-        print(f"{img["title"]} \n {img["image"]}\n\n")
+        print(f"{img['title']} \n {img['image']}\n\n")
 
 
 

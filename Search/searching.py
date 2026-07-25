@@ -64,6 +64,9 @@ class search:
             message = err.get("message", "")
         except Exception:
             reasons, message = "", resp.text
+        if "dailyLimitExceeded" in reasons or resp.status_code == 403:
+            raise Exception("Se acabaron las búsquedas gratuitas de hoy. Intenta mañana.")
+        
         raise Exception(f"HTTP {resp.status_code} – {reasons} – {message}")
         
     def safe_ascii(self, text):
