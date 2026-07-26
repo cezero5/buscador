@@ -1,11 +1,14 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
 from Search.my_token import my_token
 from Search.searching import search
 from Search.query_search import query
+import logging
+ 
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
 class telegram_bot:
     
     def __init__(self):
@@ -27,7 +30,32 @@ class telegram_bot:
             print(f"[ERROR search]: {e}")
     
     async def help(self, update: Update, context: CallbackContext):
-        await update.effective_message.reply_text(f' /start\n/search\n')
+        texto = (
+            "*Comandos disponibles*\n\n"
+            "/start - Inicia el bot\n"
+            "/search <consulta> - Busca en Google\n"
+            "/help - Muestra esta ayuda\n\n"
+            "*Filtros para /search*\n"
+            "Puedes combinar varios en la misma búsqueda, separados por espacio.\n\n"
+            "`-d=dominio.com` - Busca solo dentro de un sitio\n"
+            "   ej: `/search python -d=stackoverflow.com`\n\n"
+            "`-ft=pdf` - Busca solo un tipo de archivo\n"
+            "   ej: `/search manual -ft=pdf`\n\n"
+            "`-it=palabra` - La palabra debe estar en el título\n"
+            "   ej: `/search -it=tutorial python`\n\n"
+            "`-we=\"frase exacta\"` - Busca la frase exacta\n"
+            "   ej: `/search -we=inteligencia artificial`\n\n"
+            "`-e=palabra` - Excluye una palabra de los resultados\n"
+            "   ej: `/search python -e=django`\n\n"
+            "`-or=palabra1,palabra2` - Busca cualquiera de estas palabras\n"
+            "   ej: `/search -or=gato,perro fotos`\n\n"
+            "También puedes combinar varios valores separados por coma en un mismo filtro:\n"
+            "`/search -d=linkedin.com,facebook.com nombre`"
+        )
+        await update.effective_message.reply_text(texto, parse_mode="Markdown")
+ 
+    async def error_handler(self, update: object, context: CallbackContext):
+        logging.error("Excepción no manejada:", exc_info=context.error)
 
     def main(self):
         app = Application.builder().token(self.My_Token_BOT).build()
